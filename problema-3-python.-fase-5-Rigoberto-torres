@@ -1,0 +1,52 @@
+# ==========================================
+# PROBLEMA 3: CONTROL DE REABASTECIMIENTO
+# ==========================================
+
+# 1. MATRIZ DE INVENTARIO
+# Formato: [Código, Nombre, Stock Actual, Stock Mínimo]
+# Se incluyen 5 artículos con diferentes escenarios para probar la lógica.
+matriz_inventario = [
+    ["ART-001", "Teclado Mecánico",    15, 50],  # Requiere reabastecimiento
+    ["ART-002", "Mouse Inalámbrico",  120, 40],  # No requiere (Stock > Mínimo)
+    ["ART-003", "Monitor 24 pulgadas",  0, 20],  # Requiere reabastecimiento (Stock en 0)
+    ["ART-004", "Webcam HD",           30, 30],  # No requiere (Stock = Mínimo)
+    ["ART-005", "Audífonos Bluetooth",  8, 25]   # Requiere reabastecimiento
+]
+
+# 2. MÓDULO (FUNCIÓN)
+def calcular_pedido(stock_actual, stock_minimo):
+    """
+    Determina la cantidad exacta a pedir según la lógica de negocio.
+    """
+    # 3. LÓGICA DE NEGOCIO
+    if stock_actual < stock_minimo:
+        cantidad_a_pedir = stock_minimo - stock_actual
+    else:
+        cantidad_a_pedir = 0
+        
+    return cantidad_a_pedir
+
+def generar_reporte_reabastecimiento(matriz):
+    """
+    Recorre la matriz, aplica la lógica y genera la salida.
+    """
+    print("-" * 50)
+    print(f"{'NOMBRE DEL ARTÍCULO':<25} | {'CANTIDAD A PEDIR':<15}")
+    print("-" * 50)
+    
+    # 4. SALIDA
+    for fila in matriz:
+        # Desempaquetado de la fila de la matriz
+        codigo, nombre, stock_actual, stock_minimo = fila
+        
+        # Llamada al módulo de cálculo
+        cantidad = calcular_pedido(stock_actual, stock_minimo)
+        
+        # Impresión formateada
+        print(f"{nombre:<25} | {cantidad:<15}")
+        
+    print("-" * 50)
+
+# Ejecución del programa
+if __name__ == "__main__":
+    generar_reporte_reabastecimiento(matriz_inventario)
